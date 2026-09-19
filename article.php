@@ -21,8 +21,11 @@ if (!$article_data) {
 
 // Metadata
 $page_title = $article_data['title'] . " – Primedean Limited";
-$page_description = strip_tags(substr($article_data['content'] ?? '', 0, 160));
-$page_image = $article_data['image_url'] ?? '';
+
+$clean_content = trim(preg_replace('/\s+/', ' ', strip_tags($article_data['content'] ?? '')));
+$page_description = htmlspecialchars(mb_substr($clean_content, 0, 160)) . '...';
+
+$page_image = !empty($article_data['image_url']) ? $article_data['image_url'] : null;
 
 $current_url = SITE_URL . $_SERVER['REQUEST_URI'];
 $encoded_url = urlencode($current_url);
@@ -34,80 +37,80 @@ include 'includes/navbar.php';
 ?>
 
 <style>
-/* Styling for CKEditor output */
-.article-content {
-    color: #812C84;
-    line-height: 1.5;
-}
+    /* Styling for CKEditor output */
 
+    .article-content {
+        color: #4b5563;
+        line-height: 1.5;
+    }
 
-.article-content p {
-    margin-bottom: 0.0rem;
-    color: #812C84;
-}
+    .article-content p {
+        margin-bottom: 0.0rem;
+        color: #4b5563;
+    }
 
-.article-content h1,
-.article-content h2,
-.article-content h3,
-.article-content h4 {
-    color: #812C84;
-    font-weight: 700;
-    line-height: 1.0;
-}
+    .article-content h1,
+    .article-content h2,
+    .article-content h3,
+    .article-content h4 {
+        color: #4b5563;
+        font-weight: 700;
+        line-height: 1.0;
+    }
 
-.article-content h1 {
-    font-size: 1.875rem;
-}
+    .article-content h1 {
+        font-size: 1.875rem;
+    }
 
-.article-content h2 {
-    font-size: 1.5rem;
-}
+    .article-content h2 {
+        font-size: 1.5rem;
+    }
 
-.article-content h3 {
-    font-size: 1.25rem;
-}
+    .article-content h3 {
+        font-size: 1.25rem;
+    }
 
-.article-content ul {
-    list-style-type: disc !important;
-    margin-left: 1.5rem !important;
-    margin-bottom: 0.0em !important;
-}
+    .article-content ul {
+        list-style-type: disc !important;
+        margin-left: 1.5rem !important;
+        margin-bottom: 0.0em !important;
+    }
 
-.article-content ol {
-    list-style-type: decimal !important;
-    margin-left: 1.5rem !important;
-    margin-bottom: 0rem !important;
-}
+    .article-content ol {
+        list-style-type: decimal !important;
+        margin-left: 1.5rem !important;
+        margin-bottom: 0rem !important;
+    }
 
-.article-content li {
-    margin-bottom: 0.0rem;
-}
+    .article-content li {
+        margin-bottom: 0.0rem;
+    }
 
-.article-content strong,
-.article-content b {
-    font-weight: 700;
-    color: #812C84;
-}
+    .article-content strong,
+    .article-content b {
+        font-weight: 700;
+        color: #4b5563;
+    }
 
-.article-content em,
-.article-content i {
-    font-style: italic;
-}
+    .article-content em,
+    .article-content i {
+        font-style: italic;
+    }
 
-.article-content blockquote {
-    border-left: 4px solid #812C84;
-    padding-left: 1rem;
-    font-style: italic;
-    color: #812C84;
-    margin: 1.5rem 0;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-}
+    .article-content blockquote {
+        border-left: 4px solid #812C84;
+        padding-left: 1rem;
+        font-style: italic;
+        color: #4b5563;
+        margin: 1.5rem 0;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
 
-.article-content a {
-    color: #db3444;
-    text-decoration: underline;
-}
+    .article-content a {
+        color: #db3444;
+        text-decoration: underline;
+    }
 </style>
 <!-- Service Hero Section -->
 <section class="relative pt-12 pb-10 px-6 md:px-16 lg:px-24 xl:px-32 bg-slate-900 overflow-hidden text-white">
@@ -173,7 +176,7 @@ include 'includes/navbar.php';
 
             <!-- Dynamic Body Content -->
             <div
-                class="prose prose-sm md:prose-lg font-medium max-w-none text-[#812C84] space-y-6 leading-relaxed text-justify">
+                class="prose prose-sm md:prose-lg font-medium max-w-none text-gray-600 space-y-6 leading-relaxed text-justify">
                 <!-- <div class="prose max-w-none text-slate-700">
                     {!! $article['content'] !!}
                 </div> -->
@@ -185,18 +188,18 @@ include 'includes/navbar.php';
 
             <!-- Dynamic Tags -->
             <?php if (!empty($article_data['tags'])): ?>
-            <div
-                class="mt-12 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold text-[#812C84] uppercase tracking-wider mr-2">Tags:</span>
-                    <?php foreach ($article_data['tags'] as $tag): ?>
-                    <a href="#"
-                        class="px-3 py-1 bg-slate-100 hover:bg-[#812C84] hover:text-white rounded-lg text-xs font-semibold text-slate-600 transition-colors">
-                        <?= htmlspecialchars($tag) ?>
-                    </a>
-                    <?php endforeach; ?>
+                <div
+                    class="mt-12 pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-6">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="text-xs font-bold text-[#812C84] uppercase tracking-wider mr-2">Tags:</span>
+                        <?php foreach ($article_data['tags'] as $tag): ?>
+                            <a href="#"
+                                class="px-3 py-1 bg-slate-100 hover:bg-[#812C84] hover:text-white rounded-lg text-xs font-semibold text-slate-600 transition-colors">
+                                <?= htmlspecialchars($tag) ?>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
-            </div>
             <?php endif; ?>
         </div>
 
@@ -220,21 +223,21 @@ include 'includes/navbar.php';
                     <h4 class="text-sm font-bold text-[#812C84] uppercase tracking-widest mb-4">Categories</h4>
                     <ul class="space-y-3 text-sm font-semibold text-slate-600">
                         <?php if (!empty($categories)): ?>
-                        <?php foreach ($categories as $cat): ?>
-                        <li>
-                            <a href="news.php?category=<?= urlencode($cat['name']) ?>"
-                                class="flex justify-between items-center hover:text-[#812C84] transition-colors">
-                                <span class="text-[#812C84]">
-                                    <?= htmlspecialchars($cat['name']) ?>
-                                </span>
-                                <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-[#812C84] text-xs">
-                                    <?= (int) ($cat['article_count'] ?? 0) ?>
-                                </span>
-                            </a>
-                        </li>
-                        <?php endforeach; ?>
+                            <?php foreach ($categories as $cat): ?>
+                                <li>
+                                    <a href="news.php?category=<?= urlencode($cat['name']) ?>"
+                                        class="flex justify-between items-center hover:text-[#812C84] transition-colors">
+                                        <span class="text-[#812C84]">
+                                            <?= htmlspecialchars($cat['name']) ?>
+                                        </span>
+                                        <span class="px-2.5 py-0.5 rounded-full bg-slate-200 text-[#812C84] text-xs">
+                                            <?= (int) ($cat['article_count'] ?? 0) ?>
+                                        </span>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
                         <?php else: ?>
-                        <li class="text-xs text-slate-400">No categories found</li>
+                            <li class="text-xs text-slate-400">No categories found</li>
                         <?php endif; ?>
                     </ul>
                 </div>

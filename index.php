@@ -469,6 +469,48 @@ $about = get_about();
     </div>
 </section>
 
+
+<!-- Newsletter Subscription Section -->
+<section class="py-16 px-6 md:px-16 lg:px-24 xl:px-32 bg-slate-50 border-t border-slate-200">
+    <div
+        class="max-w-5xl mx-auto bg-[#812C84] rounded-3xl py-20 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl relative overflow-hidden">
+
+        <!-- Abstract Background Elements -->
+        <div
+            class="absolute inset-0 bg-[url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/dot-pattern-redical.svg')] opacity-20 bg-cover mix-blend-overlay pointer-events-none">
+        </div>
+        <div
+            class="absolute -right-20 -top-20 w-64 h-64 bg-[#E0C1D7] rounded-full blur-3xl opacity-20 pointer-events-none">
+        </div>
+
+        <div class="relative z-10 w-full md:w-1/2 text-center md:text-left text-white">
+            <h3 class="text-2xl md:text-3xl font-bold mb-3">Subscribe to our Newsletter</h3>
+            <p class="text-white/90 text-sm md:text-base leading-relaxed">
+                Stay updated on the latest branding trends, new services, and exclusive offers delivered directly to
+                your inbox.
+            </p>
+        </div>
+
+        <div class="relative z-10 w-full md:w-1/2">
+            <form action="process_newsletter.php" method="POST" class="w-full">
+                <div class="flex flex-col sm:flex-row w-full bg-white rounded-xl overflow-hidden p-1.5 shadow-lg gap-2">
+                    <input type="email" name="email" placeholder="Enter your email address" required
+                        class="w-full px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none text-sm rounded-lg">
+                    <button type="submit"
+                        class="bg-[#812C84] text-white px-8 py-3 font-semibold hover:bg-opacity-90 active:scale-95 transition-all text-sm rounded-lg whitespace-nowrap shadow-md">
+                        Subscribe
+                    </button>
+                </div>
+
+                <!-- Silent Anti-Bot Honeypot -->
+                <input type="text" name="fax_number" class="hidden" style="display:none !important;" tabindex="-1"
+                    autocomplete="off">
+            </form>
+            <p class="text-white/60 text-xs mt-3 text-center md:text-left">We respect your privacy. No spam, ever.</p>
+        </div>
+    </div>
+</section>
+
 <!-- Final CTA -->
 <section class="py-20 px-6 md:px-16 lg:px-24 xl:px-32 bg-white">
     <div class="rounded-3xl bg-[#812C84] p-10 md:p-16 text-center text-white relative overflow-hidden shadow-2xl">

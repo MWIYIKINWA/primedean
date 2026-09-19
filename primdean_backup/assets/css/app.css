@@ -1,0 +1,76 @@
+
+@font-face {
+    font-family: 'eagle';
+    src: url('../fonts/eagle.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* SemiBold Variant */
+@font-face {
+    font-family: 'campton';
+    src: url('../fonts/campton/CamptonSemiBold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Light Variant */
+@font-face {
+    font-family: 'campton';
+    src: url('../fonts/campton/CamptonLight.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+.eagle {
+    font-family: 'eagle', sans-serif;
+}
+
+/* Set global font family */
+body {
+    font-family: 'campton', 'Lato', sans-serif;
+    font-weight: 600; /* Defaults the rest of the site to SemiBold */
+}
+
+/* Disable dragging and selection on all site images */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none; /* Note: Removes mouse hover effects on images */
+}
+
+/* Apply light weight specifically to paragraphs */
+p, a {
+    font-weight: 300;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Change the active dot color */
+.heroSwiper .swiper-pagination-bullet-active {
+    background-color: #E0C1D7 !important;
+}
+
+/* Optional: Slightly enlarge the active dot for better visual hierarchy */
+.heroSwiper .swiper-pagination-bullet-active {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+body {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Standard */
+}
